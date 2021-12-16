@@ -1,3 +1,19 @@
+<?php
+
+include 'includes/connection.php';
+
+$con = openCon(); // open connection
+$dbSelected = $con->select_db('youthden_ecommerce'); // select database
+if (!$dbSelected) {
+    die("Can\'t use test_db : " . mysql_error());
+}
+
+session_start();
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,33 +72,46 @@
         </nav>
     </header>
 
-       <!-- CHECKOUT-->
+    <!-- CHECKOUT-->
     <section class="checkout">
-      <div class="container">
-        <div id="title">checkout</div>
-        <div id="subtitle">billing details</div>
-        <div class="d-flex">
-          <form action="" method="">
-            <input type="text" name="name" placeholder="Name" />
-            <input type="email" name="email" placeholder="Email Address" />
-            <input type="text" name="address" placeholder="Address" />
-            <input type="tel" name="phone" placeholder="Phone Number" />
-          </form>
-          <div class="order">
-            <table>
-              <tr>
-                <th colspan="2">Your order</th>
-              </tr>
-              <tr>
-                <td id="total">Total</td>
-                <td id="price">PHP 1300.00</td>
-              </tr>
-            </table>
-            <br />
-            <button class="placeorder"><a href="">place order</a></button>
-          </div>
+        <div class="container">
+            <div id="title">checkout</div>
+            <div id="subtitle">billing details</div>
+            <div class="d-flex">
+                <form action="cust_info.php" method="POST">
+                    <input type="text" name="name" placeholder="Name" />
+                    <input type="email" name="email" placeholder="Email Address" />
+                    <input type="text" name="address" placeholder="Address" />
+                    <input type="tel" name="phone" placeholder="Phone Number" />
+                </form>
+                <div class="order">
+
+                <?php 
+
+                $total_price = 0;
+
+                 if (!empty($_SESSION['cart'])) {
+
+                  foreach ($_SESSION['cart'] as $key => $value) { ?>
+                     
+                 <?php $total_price = $total_price + $value['quantity'] * $value['product_price']; ?>                        
+                <?php }
+
+                } ?>
+                    <table>
+                        <tr>
+                            <th colspan="2">Your order</th>
+                        </tr>
+                        <tr>
+                            <td id="total">Total</td>
+                            <td id="price">PHP <?php echo number_format($total_price,2); ?></td>
+                        </tr>
+                    </table>
+                    <br />
+                    <button class="placeorder"><a href="">place order</a></button>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
 
