@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2021 at 06:34 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.6
+-- Generation Time: Dec 16, 2021 at 03:32 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,34 +47,27 @@ INSERT INTO `tbl_accounts` (`id`, `first_name`, `last_name`, `email`, `password`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_customer`
+-- Table structure for table `tbl_custinfo`
 --
 
-CREATE TABLE `tbl_customer` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `full_name` varchar(255) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `customer_address` varchar(255) NOT NULL
+CREATE TABLE `tbl_custinfo` (
+  `id` int(255) NOT NULL,
+  `cust_name` varchar(255) NOT NULL,
+  `cust_email` varchar(255) NOT NULL,
+  `cust_address` varchar(255) NOT NULL,
+  `cust_phone` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `tbl_orders`
+-- Dumping data for table `tbl_custinfo`
 --
 
-CREATE TABLE `tbl_orders` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `product_name` varchar(100) NOT NULL,
-  `product_price` float NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total` float NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `date` datetime NOT NULL,
-  `customer_address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `tbl_custinfo` (`id`, `cust_name`, `cust_email`, `cust_address`, `cust_phone`) VALUES
+(1, 'Katherine D. Moore', '\r\n    KatherineDMoore@dayrep.com ', '4656 Davisson Street\r\nKokomo, IN 46902 ', '765-864-8244'),
+(2, 'Brittany J. Nock', '\r\n    BrittanyJNock@teleworm.us  ', '43947 Hall Street\r\nLas Vegas, NV 89101', '702-548-8458'),
+(3, 'Lonnie K. Booker', '\r\n    LonnieKBooker@rhyta.com', '2316 School House Road\r\nCollins, MS 39428 ', '601-765-9397'),
+(4, 'Joshua C. Bassettr', '\r\n    JoshuaCBassett@rhyta.com ', '23725 New York Avenue\r\nGlendale, CA 91204', '818-240-8827'),
+(5, 'Carol W. Carlsen', '\r\n    CarolWCarlsen@jourrapide.com ', '3163 Lake Forest Drive\r\nNew York, NY 10013 ', '914-259-5197');
 
 -- --------------------------------------------------------
 
@@ -160,15 +153,9 @@ ALTER TABLE `tbl_accounts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_customer`
+-- Indexes for table `tbl_custinfo`
 --
-ALTER TABLE `tbl_customer`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_orders`
---
-ALTER TABLE `tbl_orders`
+ALTER TABLE `tbl_custinfo`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -194,16 +181,10 @@ ALTER TABLE `tbl_accounts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tbl_customer`
+-- AUTO_INCREMENT for table `tbl_custinfo`
 --
-ALTER TABLE `tbl_customer`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_orders`
---
-ALTER TABLE `tbl_orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbl_custinfo`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_products`
