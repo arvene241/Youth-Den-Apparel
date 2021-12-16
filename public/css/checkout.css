@@ -557,8 +557,8 @@ th {
   padding: 10px 0 21px 0;
   text-align: left;
   margin-bottom: 10px;
-	font-size:22px;
-	
+  font-size:22px;
+  
 }
 
 td {
@@ -577,19 +577,21 @@ td {
   width: 100%;
   height: 50px;
   border-radius: 10px;
+  color: #ffffff;
   background-color: #000000;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 15px;
   cursor: pointer;
+}
+
+.placeorder:hover {
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .placeorder a {
   text-decoration: none;
   color: #ffffff;
-}
-
-.placeorder:hover {
-  background-color: #ffffff;
 }
 
 .placeorder:hover a {

@@ -83,25 +83,9 @@ session_start();
             <input type="email" name="cust_email" placeholder="Email Address" autocomplete="off" />
             <input type="text" name="cust_address" placeholder="Address" autocomplete="off"/>
             <input type="text" name="cust_phone" placeholder="Phone Number" autocomplete="off" />
-             <button type="submit" name="placeorder" class="placeorder" id="placeorder"><a href="#payment">place order</a></button>
+            <button type="submit" name="placeorder" class="placeorder">place order</button>
           </form>
-           <div id="payment" class="modal">
-    <div class="modal__content">
-        <div id="title">Payment Succesful</div>
-        <div id="subtitle">Thank You!</div>
-
-        <p>
-            <br>An automated payment receipt has been sent to your email.<br> Have a nice day and stay safe fellow youth!
-
-        </p>
-
-        <div class="modal__footer">
-            <div id="subtitle">-youthden.<br></div>
-        </div>
-
-        <a href="#" class="modal__close">&times;</a>
-    </div>
-</div>
+           
           <div class="order">
           
           
@@ -137,7 +121,7 @@ session_start();
               </tr>
               <tr>
                 <td id="total">Total</td>
-                <td id="price"><?php echo number_format($total_price,2); ?></td>
+                <td id="price">Php <?php echo number_format($total_price,2); ?></td>
               </tr>
             </table>
     
@@ -151,9 +135,32 @@ session_start();
 
     <script src="public/js/app.js"></script>
     <script src="public/js/hamburger.js"></script>
-      <script>function submit() { 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $(".placeorder").click(function(){
+                
+           var action = "success";
+
+             $.ajax({
+               method:"POST",
+               url:"action_cart.php",
+               data:{action:action},
+               success:function(data){
+                  alert("Thank You! An automated payment receipt has been sent to your email. Have a nice day and stay safe fellow youth! -youthden.");
+                  window.parent.location = window.parent.location.href;
+               }
+            });
+        });
+    });
+
+        function submit() { 
         document.getElementById("checkout-form").reset(); 
         } 
+
     </script>
 </body>
 
