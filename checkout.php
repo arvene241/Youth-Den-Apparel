@@ -25,6 +25,61 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="icon" type="image/png" href="public/images/logo/logo-arvene-ver.png" />
     <link rel="stylesheet" href="./public/css/checkout.css" />
+    <style>
+        .wrapper a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 3px;
+  text-transform: uppercase;
+  color: #585858;
+  font-family: 'Roboto', sans-serif;
+}
+
+.modal {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(77, 77, 77, .7);
+  transition: all .4s;
+}
+
+.modal:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal__content {
+  border-radius: 4px;
+  position: relative;
+  width: 1000px;
+  max-width: 90%;
+  background: #fff;
+  padding: 1em 2em;
+}
+
+.modal__footer {
+  text-align: right;
+  
+}
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #585858;
+  text-decoration: none;
+}
+
+
+    </style>
 </head>
 
 <body>
@@ -43,7 +98,7 @@ session_start();
                                 <a class="nav-link" href="index.php">home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="catalog.php">shop</a>
+                                <a class="nav-link" href="shop.php">shop</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.php">about</a>
@@ -78,18 +133,33 @@ session_start();
         <div id="title">checkout</div>
         <div id="subtitle">billing details</div>
         <div class="d-flex">
-          <form action="cust_info.php" method="POST">
-            <input type="text" name="cust_name" placeholder="Name" />
-            <input type="email" name="cust_email" placeholder="Email Address" />
-            <input type="text" name="cust_address" placeholder="Address" />
-            <input type="tel" name="cust_phone" placeholder="Phone Number" />
-            <button type="submit" name="placeorder" class="placeorder"><a href="">place order</a></button>
+         <form action="cust_info.php" method="POST" id="checkout-form">
+            <input type="text" name="cust_name" placeholder="Name" autocomplete="off"/>
+            <input type="email" name="cust_email" placeholder="Email Address" autocomplete="off" />
+            <input type="text" name="cust_address" placeholder="Address" autocomplete="off"/>
+            <input type="text" name="cust_phone" placeholder="Phone Number" autocomplete="off" />
+             <button type="submit" name="placeorder" class="placeorder" id="placeorder"><a href="#payment">place order</a></button>
           </form>
+           <div id="payment" class="modal">
+    <div class="modal__content">
+        <div id="title">Payment Succesful</div>
+        <div id="subtitle">Thank You!</div>
+
+        <p>
+            <br>An automated payment receipt has been sent to your email.<br> Have a nice day and stay safe fellow youth!
+
+        </p>
+
+        <div class="modal__footer">
+            <div id="subtitle">-youthden.<br></div>
+        </div>
+
+        <a href="#" class="modal__close">&times;</a>
+    </div>
+</div>
           <div class="order">
-             <section class="cart">
-        <div class="container">
-            <div class="bag">
-                    <table class="table-item">
+          
+          
                         <?php 
 
                         $total_price = 0;
@@ -116,20 +186,19 @@ session_start();
                     <?php }
                  ?>
 
+            <table>
+              <tr>
+                <th colspan="2">Your order</th>
+              </tr>
+              <tr>
+                <td id="total">Total</td>
+                <td id="price"><?php echo number_format($total_price,2); ?></td>
+              </tr>
             </table>
-                    </table>
-                </div>
-                <div class="receipt">
-                    <div class="subtotal">
-                        <p class="title"> <br> Your Order<br> </p>
-                        <hr class="line">                        
-                        <p class="price"><br>Total Price: PHP <?php echo number_format($total_price,2); ?><br></p>
-                    </div>
-                    <hr class="line">                        
-                    </div>
-                </div>
-            </div>
+    
+          </div>
         </div>
+      </div>
     </section>
 
 
@@ -137,6 +206,10 @@ session_start();
 
     <script src="public/js/app.js"></script>
     <script src="public/js/hamburger.js"></script>
+      <script>function submit() { 
+        document.getElementById("checkout-form").reset(); 
+        } 
+    </script>
 </body>
 
 </html>

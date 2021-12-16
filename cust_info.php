@@ -6,7 +6,7 @@
     if (isset($_POST['placeorder'])) { // this means that if the user clicked the submit button it will run the code
         $cust_name = $_POST['cust_name'];
         $cust_email = $_POST['cust_email'];
-        $cust_address = $_POST['cust_adddress'];
+        $cust_address = $_POST['cust_address'];
         $cust_phone = $_POST['cust_phone'];
 
         try {
